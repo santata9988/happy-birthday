@@ -1,4 +1,5 @@
-/* --- CSS Reset & Background --- */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&family=Cinzel:wght@700;900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -10,142 +11,472 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #fed6e3 0%, #a7c7e7 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at center, #11001c 0%, #240046 50%, #3c096c 100%);
+    font-family: 'Kanit', sans-serif;
     overflow: hidden;
-}
-
-/* --- Card Container --- */
-.card-container {
     perspective: 1000px;
-    cursor: pointer;
 }
 
+/* --- พื้นหลังละอองดาวและคลื่นแสง --- */
+.sparkle-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.neon-wave {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(157,78,221,0.15) 0%, rgba(0,0,0,0) 60%);
+    top: -50%;
+    left: -50%;
+    z-index: 2;
+    animation: waveMove 12s infinite linear;
+    pointer-events: none;
+}
+
+/* --- Card Container ล็อกกึ่งกลางจออย่างสมบูรณ์แบบ --- */
+.card-container {
+    position: relative;
+    z-index: 10;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 360px;
+    height: 560px;
+}
+
+/* ค้นหาคลาส .card แล้วนำโค้ดชุดนี้ไปแทนที่ของเดิมครับ */
 .card {
-    width: 340px;
-    height: 460px;
+    width: 100%;
+    height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transform: rotateY(0deg);
-    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-    border-radius: 15px;
+    transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 50px rgba(157, 78, 221, 0.4);
+    border-radius: 24px;
+    transform: rotateX(0deg) rotateY(0deg); /* บังคับค่าเริ่มต้นให้อยู่ตรงกลางเป๊ะ */
 }
 
-/* เมื่อคลิกแล้วจะแอดคลาส 'open' เพื่อพลิกการ์ด */
+/* ล็อกให้พลิกหมุนกลับหลังบนแกนกลางจอเดิมสนิท ไม่เบี้ยวหลุดตำแหน่ง */
 .card.open {
-    transform: rotateY(-180deg);
+    transform: rotateY(-180deg) !important;
 }
 
-/* --- Front & Back Sides --- */
 .card-front, .card-back {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 15px;
+    border-radius: 24px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     padding: 25px;
     text-align: center;
+    top: 0;
+    left: 0;
 }
 
-/* หน้าแรกของการ์ด */
+/* --- หน้าแรกของการ์ด --- */
 .card-front {
-    background-color: #ffffff;
-    color: #ff6b81;
+    background: linear-gradient(135deg, #ffffff 0%, #fff0f5 100%);
+    border: 5px solid #fff;
+    box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+.magic-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 60%, #ffe3ec 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(255, 107, 129, 0.2), 0 0 0 8px rgba(255, 107, 129, 0.05);
+    animation: floating 3s infinite ease-in-out;
 }
 
 .cake-emoji {
     font-size: 80px;
-    animation: bounce 2s infinite;
+    animation: heartbeat 1.5s infinite ease-in-out;
 }
 
-.card-front h1 {
-    margin-top: 20px;
-    font-size: 28px;
-    letter-spacing: 1px;
+.glow-text {
+    font-family: 'Cinzel', serif;
+    font-size: 36px;
+    font-weight: 900;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 25px;
+    letter-spacing: 2px;
+}
+
+.ribbon {
+    background: #ff4757;
+    color: white;
+    padding: 6px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    border-radius: 5px;
+    margin-top: 15px;
+    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
 }
 
 .click-hint {
-    margin-top: 30px;
-    font-size: 14px;
-    color: #aaa;
+    margin-top: 45px;
+    font-size: 13px;
+    color: #ff4757;
+    font-weight: bold;
+    letter-spacing: 1px;
     animation: pulse 1.5s infinite;
 }
 
-/* ด้านในของการ์ด (ด้านหลัง) */
+/* --- ด้านในของการ์ด (อภิมหาคำอวยพรอลังการ) --- */
 .card-back {
-    background-color: #fff9e6;
-    color: #333;
+    background: linear-gradient(135deg, #150024 0%, #32004f 50%, #150024 100%);
+    color: #fff;
     transform: rotateY(180deg);
-    border: 5px solid #ffd369;
+    border: 4px solid #ffd369;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+    overflow: hidden;
 }
 
-/* --- กรอบรูปภาพเจ้าของวันเกิด --- */
-.profile-frame {
-    width: 130px;
-    height: 130px;
+.card-border-glow {
+    position: absolute;
+    width: 96%;
+    height: 97%;
+    border: 2px solid rgba(255, 211, 105, 0.3);
+    border-radius: 20px;
+    pointer-events: none;
+    box-shadow: 0 0 15px rgba(255, 211, 105, 0.1), inset 0 0 15px rgba(255, 211, 105, 0.1);
+}
+
+/* ลบตัวแกน translateZ ตัวเก่าที่เบนการ์ดหลุดกึ่งกลาง */
+.inner-content {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card.open .inner-content {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* กรอบรูปขนาดใหญ่ */
+.mega-profile-wrapper {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-glow-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    border: 4px solid #fff;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    background: linear-gradient(45deg, #ffd700, #ff007f, #00f0ff, #ffd700);
+    background-size: 400%;
+    filter: blur(8px);
+    opacity: 0.8;
+    animation: glowRotate 8s linear infinite;
+}
+
+.profile-frame {
+    position: absolute;
+    width: 93%;
+    height: 93%;
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     overflow: hidden;
-    margin-bottom: 20px;
-    background-color: #eee; /* สีพื้นหลังสแตนด์บายกรณีรูปไม่โหลด */
+    z-index: 2;
+    transform: scale(0);
+    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.4) 0.4s;
+}
+
+.card.open .profile-frame {
+    transform: scale(1);
+    animation: picturePulse 3s infinite ease-in-out 1.4s;
 }
 
 .profile-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* บีบรูปให้พอดีกรอบวงกลมแบบไม่เบี้ยว */
+    object-fit: cover;
 }
 
-.card-back h2 {
-    color: #ff4757;
-    margin-bottom: 10px;
-    font-size: 24px;
-}
-
-.card-back p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #555;
-}
-
-/* --- Animations --- */
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-@keyframes pulse {
-    0% { opacity: 0.5; }
-    50% { opacity: 1; }
-    100% { opacity: 0.5; }
-}
-
-/* --- Confetti (พลุกระดาษ) --- */
-.confetti {
+.crown-icon {
     position: absolute;
-    width: 10px;
-    height: 10px;
-    opacity: 0;
-    top: -10px;
-    z-index: 999;
-    animation: fall linear forwards;
+    top: -28px;
+    left: 50%;
+    z-index: 3;
+    transform: translateX(-50%) scale(0);
+    font-size: 40px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.5) 0.9s;
 }
 
-@keyframes fall {
+.card.open .crown-icon {
+    transform: translateX(-50%) scale(1);
+    animation: crownWobble 2s infinite alternate ease-in-out 1.5s;
+}
+
+.mini-sparkle-1, .mini-sparkle-2 {
+    position: absolute;
+    z-index: 3;
+    font-size: 20px;
+    opacity: 0;
+    transition: opacity 0.5s 1.1s;
+}
+.mini-sparkle-1 { top: 20px; left: -10px; animation: floating 2s infinite ease-in-out; }
+.mini-sparkle-2 { bottom: 20px; right: -10px; animation: floating 2.5s infinite ease-in-out; }
+.card.open .mini-sparkle-1, .card.open .mini-sparkle-2 { opacity: 1; }
+
+.hbd-title-container {
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.hbd-title {
+    font-size: 26px;
+    font-weight: 800;
+    background: linear-gradient(to right, #fff, #ffd369, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(255, 211, 105, 0.5);
+}
+
+.title-underline {
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #ffd369, transparent);
+    margin: 4px auto 0;
+    transition: width 1s ease 0.8s;
+}
+
+.card.open .title-underline {
+    width: 100%;
+}
+
+.wish-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.wish-text-line {
+    font-size: 13.5px;
+    font-weight: 400;
+    color: #f0f0f0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.6s ease;
+}
+
+.card.open .wish-text-line:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
+.card.open .wish-text-line:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 1.1s; }
+.card.open .wish-text-line:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 1.4s; }
+.card.open .wish-text-line:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 1.7s; }
+
+/* การ์ดทอง VIP */
+.vip-money-card {
+    position: relative;
+    width: 95%;
+    background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+    border-radius: 16px;
+    padding: 12px;
+    color: #4a3300;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(211, 158, 0, 0.4);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease 1.9s;
+}
+
+.card.open .vip-money-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.shine-effect {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-30deg);
+    animation: lightShine 3s infinite;
+}
+
+.vip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    margin-bottom: 3px;
+}
+
+.chip {
+    width: 25px;
+    height: 16px;
+    background: linear-gradient(135deg, #9a9a9a 0%, #e1e1e1 50%, #767676 100%);
+    border-radius: 4px;
+}
+
+.vip-body h3 {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin: 2px 0;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+}
+
+.vip-body small { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; }
+.vip-body p { font-size: 10px; font-weight: bold; opacity: 0.8; }
+
+/* --- 🌧️ พายุฝนตกจากบนสุดนอกขอบจอ --- */
+.cake-rain {
+    position: absolute;
+    font-size: 32px;
+    pointer-events: none;
+    z-index: 100;
+    user-select: none;
+    animation: fallRain 2.5s linear forwards; /* ปรับความเร็วให้ตกลงมาสมจริงขึ้น */
+}
+
+.photo-rain {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: 3px solid #ffd369;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 100;
+    user-select: none;
+    animation: fallRain 2.5s linear forwards;
+}
+
+/* ปรับตำแหน่งเริ่มต้น (0%) ให้อยู่บนสุดเหนือนอกขอบหน้าจอ */
+@keyframes fallRain {
     0% {
-        top: -10px;
-        transform: translateX(0) rotate(0deg);
+        top: -80px; /* ดันขึ้นไปเหนือนอกขอบจอสนิท */
+        transform: scale(0.6) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
         opacity: 1;
     }
     100% {
-        top: 100vh;
-        transform: translateX(100px) rotate(360deg);
+        top: 105vh; /* ตกทะลุขอบล่างหน้าจอ */
+        transform: scale(1) rotate(360deg);
         opacity: 0;
     }
+}
+
+.ambient-particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    animation: driftUp linear forwards;
+}
+
+/* --- Animations --- */
+@keyframes fallRain {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+@keyframes glowRotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes picturePulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    50% { transform: scale(1.04); box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 20px rgba(255, 215, 0, 0.4); }
+}
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+}
+@keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+@keyframes crownWobble {
+    0% { transform: translateX(-50%) rotate(-8deg); }
+    100% { transform: translateX(-50%) rotate(8deg); }
+}
+@keyframes lightShine {
+    0% { left: -100%; }
+    40%, 100% { left: 150%; }
+}
+@keyframes waveMove {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes driftUp {
+    0% { transform: translateY(110%) scale(0.3); opacity: 0; }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.6; }
+    100% { transform: translateY(-10%) scale(1.2); opacity: 0; }
+}
+
+/* --- Particle Effect --- */
+.particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 999;
+    animation: explode 2s ease-out forwards;
+}
+@keyframes explode {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(0) rotate(var(--rot)); opacity: 0; }
 }

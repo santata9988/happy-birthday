@@ -3,29 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! 🎂</title>
+    <title>Happy Birthday Masterpiece 👑</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- พื้นหลังละอองดาวแอนิเมชัน -->
+    <div class="sparkle-bg" id="sparkleBg"></div>
+    <div class="neon-wave"></div>
 
-    <div class="card-container" onclick="toggleCard()">
+    <div class="card-container" id="cardContainer">
         <div class="card" id="birthdayCard">
             
+            <!-- หน้าแรกของการ์ด: สไตล์คลาสสิกเปิดง่าย -->
             <div class="card-front">
-                <div class="cake-emoji">🎂</div>
-                <h1>Happy Birthday!</h1>
-                <p class="click-hint">คลิกเพื่อเปิดการ์ดดูสิ ✨</p>
+                <div class="magic-circle">
+                    <div class="cake-emoji">🎂</div>
+                </div>
+                <h1 class="glow-text">HAPPY<br>BIRTHDAY</h1>
+                <div class="ribbon">FOR YOU</div>
+                <p class="click-hint">🔮 แตะเพื่อเปิดมิติของขวัญ 🔮</p>
             </div>
             
+            <!-- ด้านในของการ์ด: อภิมหาคำอวยพรอลังการ -->
             <div class="card-back">
-                <div class="profile-frame">
-                    <img src="E29B0159-0832-4D57-BA63-C21100DA1716_1_201_a.jpeg" alt="Birthday Person" class="profile-img">
+                <div class="card-border-glow"></div>
+                
+                <div class="inner-content">
+                    <div class="mega-profile-wrapper">
+                        <div class="profile-glow-ring"></div>
+                        <div class="profile-frame">
+                            <img src="E29B0159-0832-4D57-BA63-C21100DA1716_1_201_a.jpeg" alt="Birthday Person" class="profile-img">
+                        </div>
+                        <div class="crown-icon">👑</div>
+                        <div class="mini-sparkle-1">✨</div>
+                        <div class="mini-sparkle-2">⭐</div>
+                    </div>
+                    
+                    <div class="hbd-title-container">
+                        <h2 class="hbd-title">✨ สุขสันต์วันเกิดนะ ✨</h2>
+                        <div class="title-underline"></div>
+                    </div>
+                    
+                    <div class="wish-box">
+                        <p class="wish-text-line">🎉 ขอให้มีความสุขที่สุดในโลกกว้าง 🎉</p>
+                        <p class="wish-text-line">💖 คิดหวังสิ่งใดขอให้สมปรารถนาทันตา 💖</p>
+                        <p class="wish-text-line">💰 ร่ำรวยเงินทอง สุขภาพแข็งแรงไร้โรคภัย 💰</p>
+                        <p class="wish-text-line">🌟 ยิ้มกว้างๆ และน่ารักแบบนี้ตลอดไปนะ 🌟</p>
+                    </div>
+                    
+                    <div class="vip-money-card">
+                        <div class="shine-effect"></div>
+                        <div class="vip-header">
+                            <span>SPECIAL REWARD CARD</span>
+                            <span class="chip"></span>
+                        </div>
+                        <div class="vip-body">
+                            <small>💸 โอนเงินให้ลูกด้วย 💸</small>
+                            <h3>100 ฿</h3>
+                            <p>(หนึ่งร้อยบาทถ้วน)</p>
+                        </div>
+                    </div>
                 </div>
-                <h2>สุขสันต์วันเกิด 🎉</h2>
-                <p>ขอให้มีความสุขมากๆ ในทุกๆ วัน<br>
-                   คิดสิ่งใดก็ขอให้สมปรารถนา<br>
-                   สุขภาพร่างกายแข็งแรง ร่ำรวยเงินทอง! 💖</p>
-                <H1>โอนเงินให้นำ100บาท(หนึ่งร้อยบาทถ้วน)</H1>
             </div>
 
         </div>
